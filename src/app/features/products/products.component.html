@@ -1,0 +1,79 @@
+<div style="max-width: 80%;
+margin: auto;">
+  <div style="margin-left: 10%;margin-right: 10%;margin-top: 5%;">
+    <h1>Products Catelog</h1>
+  </div>
+
+  <div style="margin-left: 10%;margin-right: 10%;margin-top: 5%;">
+    <button style="grid-row: span;" type="button" class="btn btn-primary" (click)="addingNewProduct=true">add new product</button>
+
+    <div class="form-group">
+      <label for="usr">Filter</label>
+      <input type="text" class="form-control" id="usr" [(ngModel)]="filter">
+    </div>
+    <table class="table table-hover" style="border: .5px solid gray;" *ngIf="!addingNewProduct">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Category</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Units</th>
+          <th scope="col">Update</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let product of products | tableFilter: filter:['productName','productCategory','productDescription']">
+          <td>{{product.productId}}</td>
+          <ng-container *ngIf="product.edit != true">
+            <td>{{product.productCategory}}</td>
+            <td>{{product.productName}}</td>
+            <td>{{product.productDescription}}</td>
+            <td>{{product.units}}</td>
+            <td><button type="button" class="btn btn-primary" (click)="product.edit = true">edit</button></td>
+          </ng-container>
+          <ng-container *ngIf="product.edit">
+            <td><input class="form-control form-control-sm" [(ngModel)]="product.productCategory" type="text"
+                placeholder="Category"></td>
+            <td><input class="form-control form-control-sm" [(ngModel)]="product.productName" type="text"
+                placeholder="Name"></td>
+            <td><input class="form-control form-control-sm" [(ngModel)]="product.productDescription" type="text"
+                placeholder="Description"></td>
+            <td><input class="form-control form-control-sm" [(ngModel)]="product.units" type="number"
+                placeholder="Units"></td>
+            <td><button type="button" class="btn btn-info" (click)="updateProduct(product)">✓</button><button
+                type="button" class="btn btn-warning" [style.margin-left]="'5%'"
+                (click)="product.edit = false">X</button></td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-hover" *ngIf="addingNewProduct">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Category</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Units</th>
+          <th scope="col">Update</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#</td>
+          <ng-container>
+            <td><input class="form-control form-control-sm" #category type="text" placeholder="Category"></td>
+            <td><input class="form-control form-control-sm" #name type="text" placeholder="Name"></td>
+            <td><input class="form-control form-control-sm" #description type="text" placeholder="Description"></td>
+            <td><input class="form-control form-control-sm" #units type="number" placeholder="Units"></td>
+            <td><button type="button" class="btn btn-info"
+                (click)="addProductByTemplate(category.value,name.value,description.value,units.value)">✓</button><button
+                type="button" class="btn btn-warning" [style.margin-left]="'5%'"
+                (click)="addingNewProduct = false">X</button></td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
