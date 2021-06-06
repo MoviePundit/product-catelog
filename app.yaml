@@ -1,0 +1,21 @@
+runtime: python27
+service: angular
+api_version: 1
+threadsafe: true
+handlers:
+- url: /
+  static_files: dist/product-catelog/index.html
+  upload: dist/product-catelog/index.html
+- url: /
+  static_dir: dist/product-catelog
+
+skip_files:
+  - e2e/
+  - node_modules/
+  - src/
+  - coverage
+  - ^(.*/)?\..*$
+  - ^(.*/)?.*\.json$
+  - ^(.*/)?.*\.md$
+  - ^(.*/)?.*\.yaml$
+  - ^LICENSE
