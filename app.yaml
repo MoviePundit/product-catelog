@@ -9,7 +9,7 @@ handlers:
 - url: /
   static_dir: dist/product-catelog
   
-- url: /products
+- url: .*
   static_files: dist/product-catelog/index.html
   upload: dist/product-catelog/index.html
 
