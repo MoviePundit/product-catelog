@@ -1,13 +1,35 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a href="#" class="navbar-brand">
+      <img src="https://img.icons8.com/nolan/64/product.png" height="28" alt="Products">
+  </a>
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="navbar-nav">
+          <a class="nav-item btn btn-outline-light ml-5 text-white" (click)="goHome()">Home</a>
+          <a class="nav-item btn btn-outline-light ml-2 mr-2 text-white"  (click)="addingNewProduct = true">Create Product</a>
+          <form class="form-inline my-2 my-lg-0 ml-5 h-10">
+            <input class="form-control mr-sm-2" type="search" #searchcategory placeholder="Search By Category" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" (click)="retrieveAllProductsByCategory(searchcategory.value)">Search</button>
+          </form>
+      </div>
+      <div class="navbar-nav ml-auto">
+          <a class="nav-item btn btn-outline-light text-white" routerLink="/logout">Logout</a>
+      </div>
+  </div>
+</nav>
 <div style="max-width: 80%;
 margin: auto;">
   <div style="margin-left: 10%;margin-right: 10%;margin-top: 5%;">
-    <h1>Products Catelog</h1>
+    <h3 *ngIf="!addingNewProduct">PRODUCTS</h3>
+    <h3 *ngIf="addingNewProduct">CREATE PRODUCT</h3>
   </div>
 
-  <div style="margin-left: 10%;margin-right: 10%;margin-top: 5%;">
-    <button style="grid-row: span;" type="button" class="btn btn-primary" (click)="addingNewProduct=true">add new product</button>
-
-    <div class="form-group">
+  <div style="margin-left: 10%;margin-right: 10%;margin-top: 2%;">
+    <hr class="mt-1 mb-0" />
+    <div class="form-group" *ngIf="!addingNewProduct">
       <label for="usr">Filter</label>
       <input type="text" class="form-control" id="usr" [(ngModel)]="filter">
     </div>
@@ -31,7 +53,7 @@ margin: auto;">
             <td>{{product.productName}}</td>
             <td>{{product.productDescription}}</td>
             <td>{{product.units}}</td>
-            <td><button type="button" class="btn btn-primary" (click)="product.edit = true">edit</button></td>
+            <td><button type="button" class="btn btn-primary btn-sm" (click)="product.edit = true">edit</button></td>
           </ng-container>
           <ng-container *ngIf="product.edit">
             <td><input class="form-control form-control-sm" [(ngModel)]="product.productCategory" type="text"
@@ -42,9 +64,15 @@ margin: auto;">
                 placeholder="Description"></td>
             <td><input class="form-control form-control-sm" [(ngModel)]="product.units" type="number"
                 placeholder="Units"></td>
-            <td><button type="button" class="btn btn-info" (click)="updateProduct(product)">✓</button><button
+            <td>
+              <!-- <button type="button" class="btn btn-info" (click)="updateProduct(product)">✓</button><button
                 type="button" class="btn btn-warning" [style.margin-left]="'5%'"
-                (click)="product.edit = false">X</button></td>
+                (click)="product.edit = false">X</button> -->
+                <div class="btn-group btn-group-sm" role="group" aria-label="">
+                  <button type="button" class="btn btn-outline-success" (click)="updateProduct(product)">✓</button>
+                  <button type="button" class="btn btn-outline-danger" (click)="product.edit = false">X</button>
+                </div>
+            </td>
           </ng-container>
         </tr>
       </tbody>
@@ -68,10 +96,13 @@ margin: auto;">
             <td><input class="form-control form-control-sm" #name type="text" placeholder="Name"></td>
             <td><input class="form-control form-control-sm" #description type="text" placeholder="Description"></td>
             <td><input class="form-control form-control-sm" #units type="number" placeholder="Units"></td>
-            <td><button type="button" class="btn btn-info"
-                (click)="addProductByTemplate(category.value,name.value,description.value,units.value)">✓</button><button
-                type="button" class="btn btn-warning" [style.margin-left]="'5%'"
-                (click)="addingNewProduct = false">X</button></td>
+            <td>
+                <div class="btn-group btn-group-sm" role="group" aria-label="">
+                  <button type="button" class="btn btn-outline-success" (click)="addProductByTemplate(category.value,name.value,description.value,units.value)">✓</button>
+                  <button type="button" class="btn btn-outline-danger" (click)="addingNewProduct = false">X</button>
+                </div>
+
+            </td>
           </ng-container>
         </tr>
       </tbody>

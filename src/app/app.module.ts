@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConfigService } from './core/services/config/config.service';
 import { BasicAuthHttpInterceptorService } from './core/services/interceptor/basic-auth-http-interceptor.service';
+import { HttpErrorInterceptorService } from './core/services/interceptor/http-error-interceptor.service';
 import { LoginComponent } from './features/login/login.component';
 import { LogoutComponent } from './features/logout/logout.component';
 import { TableFilterPipe } from './features/products/filter.pipe';
@@ -30,6 +31,9 @@ import { ProductsComponent } from './features/products/products.component';
     ConfigService,
     {
       provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptorService, multi: true
     }
   ],
   bootstrap: [AppComponent]

@@ -33,9 +33,10 @@ export class ProductsComponent implements OnInit {
     this.service.getProductsByCategory(category).subscribe((data:Product[]) => {
       if(data){
         this.products = data;
-        this.unfilterProducts = data;
+        
       }
     })
+    this.addingNewProduct=false;
   }
 
   updateProduct(updatedProduct:Product){
@@ -78,4 +79,8 @@ export class ProductsComponent implements OnInit {
     
   }
 
+  goHome(){
+    this.addingNewProduct = false;
+    this.retrieveAllProducts();
+  }
 }
