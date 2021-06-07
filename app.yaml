@@ -8,6 +8,10 @@ handlers:
   upload: dist/product-catelog/index.html
 - url: /
   static_dir: dist/product-catelog
+  
+- url: /products
+  static_files: dist/product-catelog/index.html
+  upload: dist/product-catelog/index.html
 
 skip_files:
   - e2e/
