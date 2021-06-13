@@ -7,7 +7,6 @@ import { environment } from './../../../../environments/environment';
 
 /**
  * This service class loads configuration details.
- * class has load config method which is called thourgh configFacotry which futher being inovked at
  * application start up in app module.
  */
 @Injectable()
@@ -23,7 +22,9 @@ export class ConfigService {
   public getConfig(): any {
     return this.configuration;
   }
-
+  /**
+   * method return baseurl loaded fron env specific config and default to environment
+   */
   public getBaseUrl(): string {
     return this.configuration.apiBaseUrl;
   }

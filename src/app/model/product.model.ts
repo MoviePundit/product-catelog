@@ -1,13 +1,4 @@
-export interface Product {
-    productId?: number;
-    productCategory?: string;
-    productName?: string;
-    productDescription?: string;
-    units: number;
-    edit?: boolean;
-}
-
-export class product implements Product {
+export class Product {
     productId: number;
     productCategory: string;
     productName: string;

@@ -10,7 +10,7 @@ import { BasicAuthHttpInterceptorService } from './core/services/interceptor/bas
 import { HttpErrorInterceptorService } from './core/services/interceptor/http-error-interceptor.service';
 import { LoginComponent } from './features/login/login.component';
 import { LogoutComponent } from './features/logout/logout.component';
-import { TableFilterPipe } from './features/products/filter.pipe';
+import { TableFilterPipe } from './core/pipes/filter.pipe';
 import { ProductsComponent } from './features/products/products.component';
 
 @NgModule({

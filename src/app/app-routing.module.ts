@@ -6,11 +6,11 @@ import { LogoutComponent } from './features/logout/logout.component';
 import { ProductsComponent } from './features/products/products.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'products', pathMatch: 'full' },
+  { path: '', redirectTo: 'products', pathMatch: 'full'},
   { path: 'products', component: ProductsComponent, canActivate: [AuthGuardService] },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent, canActivate: [AuthGuardService] },
-  { path: "**", redirectTo: 'products'}
+  { path: "**", redirectTo: 'products' }
 ];
 
 @NgModule({

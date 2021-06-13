@@ -3,7 +3,6 @@ import {
   HttpInterceptor,
   HttpHandler,
   HttpRequest,
-  HttpResponse,
   HttpErrorResponse
 
 } from '@angular/common/http';
@@ -11,14 +10,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { AuthenticationService } from '../auth/authentication.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpErrorInterceptorService implements HttpInterceptor {
-  constructor(private authenticationService: AuthenticationService,) { }
+  constructor(private router: Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -34,7 +32,7 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
 
           if (error.status === 401 || error.status === 403) {
             //navigate /delete cookies 
-            this.authenticationService.logOut();
+            this.router.navigate(['logout']);
           }
           else if (error.error instanceof ErrorEvent) {
             // client-side error
